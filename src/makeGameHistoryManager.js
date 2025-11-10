@@ -1,12 +1,12 @@
 const Game = require("./Game");
 const path = require('node:path');
-const { readFromFile, writeToFile } = require('./utils/fileIO');
+const { readFromJSONFile, writeToJSONFile } = require('./utils/fileIO');
 const PATH_TO_GAME_HISTORY = path.join(__dirname, './data/gameHistory.json');
 
 // Factory Function that manages a gameHistory and input/output with the gameHistory.json file.
 const makeGameHistoryManager = () => {
   // Check to see if there is a saved history in the gameHistory.json file
-  const savedHistory = readFromFile(PATH_TO_GAME_HISTORY);
+  const savedHistory = readFromJSONFile(PATH_TO_GAME_HISTORY);
 
   // set gameHistory to savedHistory (if it exists) or [] as a backup
   const gameHistory = savedHistory || [];
@@ -38,7 +38,7 @@ const makeGameHistoryManager = () => {
       });
     },
     saveGameHistory() {
-      writeToFile(PATH_TO_GAME_HISTORY, gameHistory);
+      writeToJSONFile(PATH_TO_GAME_HISTORY, gameHistory);
       console.log("Game saved. Thanks for playing!");
     },
   }
